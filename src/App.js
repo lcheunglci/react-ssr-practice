@@ -1,12 +1,12 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 import { About } from "./page/About";
 import { Articles } from "./page/Articles";
 import { Home } from "./page/Home";
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <>
       <h1>Server-side rendering example</h1>
       <ul>
         <li>
@@ -24,8 +24,7 @@ const App = () => {
         <Route path="about" element={<About />} />
         <Route path="articles" element={<Articles />} />
       </Routes>
-    </BrowserRouter>
-    
+    </>
   )
 }
 
