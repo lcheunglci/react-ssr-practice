@@ -1,17 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
+import { useDataSSR } from '../useDataSSR';
 
 export const Articles = () => {
 
-    const [articles, setArticles] = useState(window && window.preloadedArticles);
-
-    useEffect(() => {
-        if (window && !window.preloadedArticles){
-            console.log('No preloaded articles found, from server');
-            fetch('/api/articles')
-                .then(response => response.json())
-                .then(data => setArticles(data));
-        }
-    }, []);
+    const articles = useDataSSR('articles', () => {
+        console.log('No preloaded articles found, from server');
+        return fetch('http://localhost:8080/api/articles')
+            .then(response => response.json())
+    });
 
     return (
         <>
