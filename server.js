@@ -1,7 +1,7 @@
 import express from 'express';
 import React from "react";
 import { ServerStyleSheet } from 'styled-components';
-import { renderToString } from 'react-dom/server'
+import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom'
 import path from 'path'
 import fs from 'fs'
@@ -11,8 +11,18 @@ const app = express();
 
 app.use(express.static('./build', { index: false}));
 
+const articles = [
+    {title: 'Article 1', author: 'Alice'},
+    {title: 'Article 2', author: 'Bob'},
+    {title: 'Article 3', author: 'Carl'},
+];
+
+app.get('/api/articles', (req, res) => {
+    const loadedArticles = articles;
+    res.json(loadedArticles);
+});
+
 app.get('/*', (req, res) => {
-    
     const sheet = new ServerStyleSheet();
 
     const reactApp = renderToString(
