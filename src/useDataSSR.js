@@ -9,7 +9,7 @@ export const useDataSSR = (resourceName, loadFunc) => {
         context._request.push(
             loadFunc().then(result => context._data[resourceName] = result)
         )
-    } else (!data) {
+    } else if (!data) {
         loadFunc().then(result => {
             setData(result)
             context._data[resourceName] = result;
