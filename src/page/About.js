@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useState } from 'react';
 // import { Three } from './Three';
 // import { Two } from './Two';
 // import { One } from './One';
@@ -9,14 +9,20 @@ const Three = lazy(() => import('./Three'));
 
 export const About = () => {
 
+    const [showComponents, setShowComponents] = useState(false);
+
+
     return (
         <>
         <h1>About us</h1>
-        <Suspense fallback={<p>Loading...</p>}>
-            <One />
-            <Two />
-            <Three />
-        </Suspense>
+        {showComponents && (
+            <Suspense fallback={<p>Loading...</p>}>
+                <One />
+                <Two />
+                <Three />
+            </Suspense>
+        )}
+        <button onClick={() => setShowComponents(true)}>Show</button>
         </>
     )
 }
